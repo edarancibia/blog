@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170816193520) do
+ActiveRecord::Schema.define(version: 20170821205526) do
 
   create_table "DEPARTMENT", primary_key: "DEPT_ID", id: :integer, force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=latin1" do |t|
     t.string "DEPT_NAME",            null: false
@@ -32,6 +32,8 @@ ActiveRecord::Schema.define(version: 20170816193520) do
     t.integer  "visits_count"
     t.datetime "created_at",                 null: false
     t.datetime "updated_at",                 null: false
+    t.integer  "user_id"
+    t.index ["user_id"], name: "index_articles_on_user_id", using: :btree
   end
 
   create_table "calendar", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=latin1" do |t|
@@ -123,4 +125,5 @@ ActiveRecord::Schema.define(version: 20170816193520) do
     t.datetime "register_date",             default: -> { "CURRENT_TIMESTAMP" }, null: false
   end
 
+  add_foreign_key "articles", "users"
 end
